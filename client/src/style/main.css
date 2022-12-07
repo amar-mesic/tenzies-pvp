@@ -1,0 +1,90 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #F5F5F5;
+
+    margin: 2em 4em;
+    padding: 2em;
+
+    border-radius: 1em;
+}
+
+.main > * {
+    margin: 16px auto;
+}
+
+.title {
+    font-size: 5em;
+}
+
+.desc {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 1.5em;
+    text-align: center;
+
+    color: #4A4E74;
+}
+
+.dice-boards {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+
+    margin-top: 2em;
+
+    width: 100%;
+}
+
+.player-header {
+    font-size: 2em;
+    margin: 8px auto;
+}
+
+.drop-shadow {
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+/* button style */
+.cool-button {
+    position: relative;
+
+    background-color: #5035FF;
+
+    font-size: 3em;
+    font-weight: 700;
+
+    padding: 0.5em 0;
+    width: 30%;
+    min-width: 100px;
+
+    border: none;
+    border-radius: 8px;
+
+    /* cursor: pointer; */
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    overflow: hidden;
+}
+
+.cool-button:after {
+    content: "";
+    background: #5f46ff;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px!important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.cool-button:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
