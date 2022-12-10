@@ -1,6 +1,5 @@
-
 export type DieState = {
-    id: string,
-    value: number,
+    id: string
+    value: number
     isFrozen: boolean
-};
+}

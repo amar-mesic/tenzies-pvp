@@ -1,0 +1,7 @@
+{
+    "env": {
+        "browser": true,
+        "jest": true
+    },
+    "extends": ["react-app", "react-app/jest", "prettier"]
+}
