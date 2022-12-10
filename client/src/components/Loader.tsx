@@ -1,7 +1,7 @@
 import '../style/loader.css'
 
 export default function Loader() {
-    return(
+    return (
         <div className="loader-inner m-auto">
             <div className="loader-line-wrap">
                 <div className="loader-line"></div>
