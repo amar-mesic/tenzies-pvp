@@ -1,7 +1,5 @@
-.App {
-  background-color: #0B2434;
-
-  padding: 2em 0 2em 0;
-
-  min-height: 100vh;
+.container {
+    background-color: #0b2434;
+    padding: 2em 0 2em 0;
+    min-height: 100vh;
 }

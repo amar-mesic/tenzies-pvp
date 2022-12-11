@@ -2,6 +2,7 @@ import './App.css'
 import Main from './components/Main'
 import io from 'socket.io-client'
 import { useEffect } from 'react'
+import Footer from './components/Footer'
 
 const NO_OF_DICE = 10
 /**
@@ -33,7 +34,10 @@ function App() {
 
     return (
         <div className="App">
-            <Main noOfDice={NO_OF_DICE} socket={socket} />
+            <section className="container">
+                <Main noOfDice={NO_OF_DICE} socket={socket} />
+            </section>
+            <Footer />
         </div>
     )
 }

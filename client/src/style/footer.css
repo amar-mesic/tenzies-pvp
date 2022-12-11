@@ -1,0 +1,26 @@
+footer {
+    background-color: #161619;
+    color: white;
+
+    padding: 1em;
+}
+
+.social-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    padding: 2em 20%;
+}
+
+.social-info > * {
+    font-size: x-large;
+    list-style: none;
+}
+
+.copyright {
+    text-align: center;
+    font-size: 1em;
+    color: #aaa;
+    padding-top: 1em;
+}
