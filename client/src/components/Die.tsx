@@ -10,6 +10,12 @@ type MyProps = {
     handleClick: (event: SyntheticEvent) => void
     handleAnimationEnd: AnimationEventHandler<HTMLDivElement>
 }
+
+/**
+ *
+ * @param {MyProps} props of the die.
+ * @returns A Die element.
+ */
 export default function Die(props: MyProps) {
     const { value, isFrozen, handleClick, handleAnimationEnd } = props
 

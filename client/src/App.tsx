@@ -4,9 +4,17 @@ import io from 'socket.io-client'
 import { useEffect } from 'react'
 
 const NO_OF_DICE = 10
+/**
+ * Handle as much of the socket logic in the app as possible.
+ * Due to the need to communicate state, some of the socket work is done in Main.
+ */
 const socket = io('http://localhost:3001')
 
 function App() {
+    /**
+     * Run effectful code only once after rendering, since dependency array is empty.
+     * Add socket handlings for the different events.
+     */
     useEffect(() => {
         socket.on('connect', () => {
             console.log('connected')

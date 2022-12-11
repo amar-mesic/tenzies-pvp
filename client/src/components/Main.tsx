@@ -6,22 +6,36 @@ import '../style/main.css'
 import DiceBoard from './DiceBoard'
 import Loader from './Loader'
 
+/**
+ * Properties of Main
+ */
 type MainProps = {
     noOfDice: number
     socket: any
 }
 
-export type DiceBoardState = {
+/**
+ * Representation of state of a Diceboard
+ */
+type DiceBoardState = {
     dieStates: DieState[]
     completed: boolean
     rolling: boolean
 }
 
-export type MainState = {
+/**
+ * Main consists of two diceboards for player and opponent,
+ * and a boolean for whether the opponent is ready to play (i.e. whether palyer has gotten opponent)
+ */
+type MainState = {
     diceBoard: DiceBoardState
     oppState: DiceBoardState
     oppReady: boolean
 }
+
+/**
+ * Main Class of the app.
+ */
 export default class Main extends React.Component<MainProps, MainState> {
     constructor(props: MainProps) {
         super(props)
@@ -35,17 +49,21 @@ export default class Main extends React.Component<MainProps, MainState> {
         this.reset = this.reset.bind(this)
     }
 
+    /**
+     * Run code after render
+     */
     componentDidMount() {
-        setInterval(() => {
-            console.log(`dice rolling: ${this.state.diceBoard.rolling}`)
-        }, 5000)
-
         const { socket } = this.props
 
         socket.on('player_joined', () => {
             socket.emit('send_init_state', this.state.diceBoard)
         })
 
+        /**
+         * When receiving opponent's initial state, set readiness to true,
+         * and respond with player initial state. This way we do not need to care
+         * who got in the room first.
+         */
         socket.on('receive_init_state', (initState: DiceBoardState) => {
             if (!this.state.oppReady) {
                 this.setState((prevState) => {
@@ -81,11 +99,20 @@ export default class Main extends React.Component<MainProps, MainState> {
                 oppReady: false,
             }))
         })
+
+        // playDsPopup('ds1')
     }
 
-    defaultState(props: MainProps): MainState {
+    /**
+     * Fill array with one value, then make sure it is random using map.
+     * Called in constructor.
+     *
+     * @param props determines the number of dice on the diceboard.
+     * @returns a default and random initial state for a diceboard.
+     */
+    defaultState({ noOfDice }: MainProps): MainState {
         const myDiceBoard = {
-            dieStates: new Array<DieState>(props.noOfDice)
+            dieStates: new Array<DieState>(noOfDice)
                 .fill({
                     id: '',
                     value: Math.ceil(Math.random() * 6),
@@ -111,6 +138,14 @@ export default class Main extends React.Component<MainProps, MainState> {
         }
     }
 
+    /**
+     * Handle the freezing of the clicked die. Called each time die is clicked.
+     * Callback of setState ensures that the opponent is informed of the move made,
+     * and checks if game is won.
+     *
+     * @param e the click event which we need to avoid default behaviour.
+     * @param id of each die in order to select the one pressed.
+     */
     handleFreeze(e: SyntheticEvent, id: string) {
         e.preventDefault()
         this.setState(
@@ -140,6 +175,13 @@ export default class Main extends React.Component<MainProps, MainState> {
         )
     }
 
+    /**
+     * Called after every time a die is frozen.
+     * Checks that all dice are frozen and have the same value.
+     *
+     * If completed, update state and send move to opponent.
+     * @todo send a unique message stating that game is won.
+     */
     checkDone() {
         const completed = this.state.diceBoard.dieStates.every(
             (dieState) =>
@@ -160,7 +202,14 @@ export default class Main extends React.Component<MainProps, MainState> {
             )
     }
 
+    /**
+     * Called every time the Roll Button is clicked.
+     * For each unfrozen die, assign it a new value, and set the diceboard to be rolling.
+     */
     handleRoll() {
+        /**
+         * @callback anonymous send move to opponent.
+         */
         this.setState(
             (prevState: MainState) => ({
                 ...prevState,
@@ -188,6 +237,10 @@ export default class Main extends React.Component<MainProps, MainState> {
         )
     }
 
+    /**
+     * Called every time the roll animation ends.
+     * Set the diceboard rolling to false.
+     */
     handleAnimationEnd() {
         this.setState(
             (prevState) => ({
@@ -205,10 +258,19 @@ export default class Main extends React.Component<MainProps, MainState> {
         )
     }
 
+    /**
+     * Called when the game is over and the Roll Button (in a different state is clicked).
+     */
     reset() {
         this.setState(this.defaultState(this.props))
     }
 
+    /**
+     * Create the layout of main.
+     * It contains some header text, two diceboards, and a button to roll the dice.
+     *
+     * @returns the  layout of the Main Element.
+     */
     render() {
         const {
             dieStates: myDieStates,
@@ -219,7 +281,23 @@ export default class Main extends React.Component<MainProps, MainState> {
             this.state.oppState
         const { oppReady } = this.state
 
-        let gameButton = (
+        const lossPopup =
+            !myGameFinished && oppGameFinished ? (
+                <dialog
+                    open={true}
+                    onAnimationEnd={(e) => {
+                        const dialog = e.currentTarget
+                        dialog.removeAttribute('open')
+                    }}
+                    className="you-lost-popup"
+                >
+                    <h1>YOU LOST</h1>
+                </dialog>
+            ) : (
+                <></>
+            )
+
+        const gameButton = (
             <button
                 className={`cool-button drop-shadow text-white ${
                     oppReady ? '' : 'opacity-50 cursor-not-allowed'
@@ -239,6 +317,7 @@ export default class Main extends React.Component<MainProps, MainState> {
         return (
             <div className="main">
                 {myGameFinished && !oppGameFinished && <Confetti />}
+                {lossPopup}
                 <h1 className="title">Tenzies</h1>
                 <p className="desc">
                     Roll until all dice are the same. Click each die to freeze

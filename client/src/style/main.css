@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
 
-    background-color: #F5F5F5;
+    background-color: #f5f5f5;
 
     margin: 2em 4em;
     padding: 2em;
@@ -26,7 +26,7 @@
     font-size: 1.5em;
     text-align: center;
 
-    color: #4A4E74;
+    color: #4a4e74;
 }
 
 .dice-boards {
@@ -51,7 +51,7 @@
 .cool-button {
     position: relative;
 
-    background-color: #5035FF;
+    background-color: #5035ff;
 
     font-size: 3em;
     font-weight: 700;
@@ -70,21 +70,70 @@
 }
 
 .cool-button:after {
-    content: "";
+    content: '';
     background: #5f46ff;
     display: block;
     position: absolute;
     padding-top: 300%;
     padding-left: 350%;
-    margin-left: -20px!important;
+    margin-left: -20px !important;
     margin-top: -120%;
     opacity: 0;
-    transition: all 0.8s
+    transition: all 0.8s;
 }
 
 .cool-button:active:after {
     padding: 0;
     margin: 0;
     opacity: 1;
-    transition: 0s
+    transition: 0s;
+}
+
+@import url('https://fonts.cdnfonts.com/css/optimus-princeps');
+dialog.you-lost-popup {
+    /* box */
+    position: fixed;
+    z-index: 99;
+    top: 40%;
+    width: 100%;
+
+    /* text */
+    text-align: center;
+    font-family: 'Optimus Princeps';
+
+    /* colors */
+    background: none;
+    color: black;
+
+    /* effects */
+    border: none;
+    text-shadow: 0 0 1.2em orangered;
+
+    /* animation */
+    animation-name: you-lost-popup-anim;
+    animation-duration: 10s;
+    animation-iteration-count: 1;
+    animation-play-state: running;
+}
+
+@keyframes you-lost-popup-anim {
+    from {
+        opacity: 0;
+        font-size: 4em;
+        text-shadow: 0 0 0.6em orange;
+    }
+
+    15% {
+        opacity: 1;
+        text-shadow: 0 0 1em orangered;
+    }
+
+    95% {
+        opacity: 1;
+    }
+
+    to {
+        font-size: 10em;
+        opacity: 0;
+    }
 }

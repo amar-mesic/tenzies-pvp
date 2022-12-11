@@ -16,6 +16,10 @@ server.listen(3001, () => {
     console.log('server running...')
 })
 
+/**
+ * Keep track of users and rooms by counting.
+ * Each room will have two sockets, and all logic derives from that.
+ */
 let noOfUsers = 0
 io.on('connect', (socket) => {
     console.log(`new connection: ${socket.id}`)
@@ -23,6 +27,7 @@ io.on('connect', (socket) => {
     noOfUsers++
     console.log(`number of users connected: ${noOfUsers}`)
 
+    // Floor Division
     const socketRoomNumber = ~~((noOfUsers - 1) / 2)
     const socketRoom = `room_${socketRoomNumber}`
     void socket.join(socketRoom)
@@ -34,14 +39,17 @@ io.on('connect', (socket) => {
         socket.to(socketRoom).emit('player_joined')
     }
 
+    // send initial diceboard state to opponent
     socket.on('send_init_state', (initBoard) => {
         socket.to(socketRoom).emit('receive_init_state', initBoard)
     })
 
+    // send move to opponent
     socket.on('send_move', (diceBoard) => {
         socket.to(socketRoom).emit('receive_move', diceBoard)
     })
 
+    // handle a player leaving the room
     socket.on('disconnect', () => {
         console.log(`disconnected: ${socket.id}`)
         noOfUsers--

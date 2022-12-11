@@ -11,6 +11,13 @@ type MyProps = {
     handleFreeze: (e: SyntheticEvent, id: string) => void
     handleAnimationEnd: AnimationEventHandler<HTMLDivElement>
 }
+
+/**
+ *
+ * @param {MyProps} props of the diceboard,
+ * a lot of which is passed down to each individual die.
+ * @returns a diceboard layout.
+ */
 export default function DiceBoard(props: MyProps) {
     const { ready, rolling, opponent, dieStates, handleFreeze } = props
 
