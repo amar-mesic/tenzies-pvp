@@ -9,7 +9,7 @@ const NO_OF_DICE = 10
  * Handle as much of the socket logic in the app as possible.
  * Due to the need to communicate state, some of the socket work is done in Main.
  */
-const socket = io('http://localhost:3001')
+const socket = io('http://127.0.0.1:3001')
 
 function App() {
     /**

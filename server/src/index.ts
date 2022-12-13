@@ -2,16 +2,25 @@ import express from 'express'
 import http from 'http'
 import { Server } from 'socket.io'
 import cors from 'cors'
+import path from 'path'
 
 const app = express()
+
+app.use(express.static('public'))
 app.use(cors())
+
 const server = http.createServer(app)
 const io = new Server(server, {
     cors: {
-        origin: 'http://localhost:3000',
+        origin: 'http://127.0.0.1:3000',
         methods: ['GET', 'POST'],
     },
 })
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname + '/public/index.html'))
+})
+
 server.listen(3001, () => {
     console.log('server running...')
 })

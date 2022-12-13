@@ -9,7 +9,9 @@ node_modules/
 /coverage
 
 # production
-server/build/
+# include both build directories in repo
+# server/build/
+# client/build/
 
 # misc
 *.DS_Store

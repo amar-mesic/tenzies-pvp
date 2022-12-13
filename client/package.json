@@ -28,10 +28,11 @@
     },
     "scripts": {
         "start": "react-scripts start",
-        "build": "react-scripts build",
+        "build": "react-scripts build && npm run publicize",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "lint": "eslint src"
+        "lint": "eslint src",
+        "publicize": "rm -r ../server/public/ && cp -r ./build/ ../server/public/"
     },
     "browserslist": {
         "production": [
@@ -48,6 +49,7 @@
     "devDependencies": {
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-prettier": "^4.2.1",
+        "pm2": "^5.2.2",
         "prettier": "^2.8.1"
     }
 }
