@@ -10,8 +10,8 @@ node_modules/
 
 # production
 # include both build directories in repo
-# server/build/
-# client/build/
+server/build/
+client/build/
 
 # misc
 *.DS_Store
