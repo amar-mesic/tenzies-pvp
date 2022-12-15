@@ -8,9 +8,18 @@
 
     background: none;
 
-    width: 100px;
+    max-width: 120px;
+    min-width: 60px;
 
     transform-style: preserve-3d;
+}
+
+@supports not (aspect-ratio: 1) {
+    .cube::before {
+        float: left;
+        padding-top: 100%;
+        content: '';
+    }
 }
 
 .cube[data-rolling='false'] {

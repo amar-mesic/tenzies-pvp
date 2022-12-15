@@ -325,31 +325,39 @@ export default class Main extends React.Component<MainProps, MainState> {
                 </p>
                 <p className="desc">Try to finish before your opponent!</p>
                 <div className="dice-boards">
-                    <h2 className="player-header">My Board</h2>
-                    <h2 className="player-header opponent">Opponent's Board</h2>
-                    <DiceBoard
-                        ready={oppReady}
-                        opponent={false}
-                        rolling={rolling}
-                        dieStates={myDieStates}
-                        handleFreeze={this.handleFreeze}
-                        handleAnimationEnd={this.handleAnimationEnd}
-                    />
-                    {oppReady ? (
+                    <div className="player-board">
+                        <h2 className="player-header">My Board</h2>
                         <DiceBoard
                             ready={oppReady}
-                            opponent={true}
-                            rolling={false}
-                            dieStates={oppDieStates}
+                            opponent={false}
+                            rolling={rolling}
+                            dieStates={myDieStates}
                             handleFreeze={this.handleFreeze}
                             handleAnimationEnd={this.handleAnimationEnd}
                         />
-                    ) : (
-                        <div className="m-auto">
-                            <p className="opacity-50">Waiting on Opponent</p>
-                            <Loader />
-                        </div>
-                    )}
+                    </div>
+                    <div className="player-board">
+                        <h2 className="player-header opponent">
+                            Opponent's Board
+                        </h2>
+                        {oppReady ? (
+                            <DiceBoard
+                                ready={oppReady}
+                                opponent={true}
+                                rolling={false}
+                                dieStates={oppDieStates}
+                                handleFreeze={this.handleFreeze}
+                                handleAnimationEnd={this.handleAnimationEnd}
+                            />
+                        ) : (
+                            <div className="m-auto pt-4">
+                                <p className="opacity-50">
+                                    Waiting on Opponent
+                                </p>
+                                <Loader />
+                            </div>
+                        )}
+                    </div>
                 </div>
                 {gameButton}
             </div>

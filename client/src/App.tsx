@@ -35,7 +35,7 @@ function App() {
 
     return (
         <div className="App">
-            <section className="container">
+            <section className="my-container">
                 <Main noOfDice={NO_OF_DICE} socket={socket} />
             </section>
             <Footer />

@@ -25,6 +25,7 @@
     font-weight: 300;
     font-size: 1.5em;
     text-align: center;
+    margin: 4px auto;
 
     color: #4a4e74;
 }
@@ -38,6 +39,10 @@
     width: 100%;
 }
 
+.player-board {
+    text-align: center;
+}
+
 .player-header {
     font-size: 2em;
     margin: 8px auto;
@@ -45,6 +50,34 @@
 
 .drop-shadow {
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+@media only screen and (max-width: 700px) {
+    .main {
+        margin: 2px 4px;
+        padding: 2px;
+    }
+    .title {
+        font-size: 2em;
+    }
+
+    .desc {
+        font-size: 1em;
+    }
+
+    .dice-boards {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, 1fr);
+    }
+
+    .player-header {
+        font-size: 1em;
+        margin: 0 auto;
+    }
+}
+
+.p-auto {
+    padding: auto;
 }
 
 /* button style */
@@ -58,7 +91,7 @@
 
     padding: 0.5em 0;
     width: 30%;
-    min-width: 100px;
+    min-width: 50px;
 
     border: none;
     border-radius: 8px;
