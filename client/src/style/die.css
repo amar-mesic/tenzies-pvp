@@ -9,9 +9,17 @@
     background: none;
 
     max-width: 120px;
-    min-width: 60px;
+    min-width: 30px;
 
     transform-style: preserve-3d;
+
+    font-size: 1em;
+}
+
+@media only screen and (max-width: 400px) {
+    .cube {
+        font-size: 0.75em;
+    }
 }
 
 @supports not (aspect-ratio: 1) {
@@ -85,8 +93,6 @@
     align-items: center;
     aspect-ratio: 1;
     background-color: #ffffff;
-
-    font-size: 3.5em;
 
     border-radius: 8px;
     border-width: 1px;

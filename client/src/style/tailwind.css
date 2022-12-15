@@ -597,6 +597,12 @@ video {
   margin: auto;
 }
 
+.min-w-fit {
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+}
+
 .cursor-not-allowed {
   cursor: not-allowed;
 }

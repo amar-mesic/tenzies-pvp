@@ -300,7 +300,7 @@ export default class Main extends React.Component<MainProps, MainState> {
         const gameButton = (
             <button
                 className={`cool-button drop-shadow text-white ${
-                    oppReady ? '' : 'opacity-50 cursor-not-allowed'
+                    oppReady ? '' : 'opacity-50 cursor-not-allowed min-w-fit'
                 }`}
                 onClick={
                     oppReady
