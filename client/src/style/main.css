@@ -7,7 +7,7 @@
     background-color: #f5f5f5;
 
     margin: 2em 4em;
-    padding: 2px;
+    padding: 1em;
 
     border-radius: 1em;
 }
@@ -86,7 +86,6 @@
     font-weight: 700;
 
     padding: 0.5em 0;
-    width: 30%;
 
     border: none;
     border-radius: 8px;
