@@ -9,7 +9,8 @@ const NO_OF_DICE = 10
  * Handle as much of the socket logic in the app as possible.
  * Due to the need to communicate state, some of the socket work is done in Main.
  */
-const socket = io('http://54.243.86.231:3001')
+const socket =
+    process.env.NODE_ENV === 'production' ? io() : io('http://127.0.0.1:3001')
 
 function App() {
     /**

@@ -14,7 +14,7 @@ app.use((0, cors_1.default)());
 const server = http_1.default.createServer(app);
 const io = new socket_io_1.Server(server, {
     cors: {
-        origin: 'http://127.0.0.1:3000',
+        origin: ['http://127.0.0.1', 'http://ifeta.me', 'http://54.243.86.231'],
         methods: ['GET', 'POST'],
     },
 });
@@ -34,6 +34,7 @@ io.on('connect', (socket) => {
     // potentially add modulo or find other way to keep track of all
     noOfUsers++;
     console.log(`number of users connected: ${noOfUsers}`);
+    console.log(`original http request origin: ${JSON.stringify(socket.request.headers.origin)}`);
     // Floor Division
     const socketRoomNumber = ~~((noOfUsers - 1) / 2);
     const socketRoom = `room_${socketRoomNumber}`;
